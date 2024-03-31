@@ -1,0 +1,21 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.example.drug.mapper.UserMapper">
+
+    <select id="pageC" resultType="com.example.drug.entity.User">
+        select * from user
+    </select>
+    <select id="pageCC" resultType="com.example.drug.entity.User">
+        select * from user,userrole,role
+        where user.userId=userrole.userId and userrole.roleId=role.roleId
+        <if test="ew.sqlSegment != null and ew.sqlSegment != ''">
+            and ${ew.sqlSegment}
+        </if>
+    </select>
+
+    <select id="listAll" resultType="com.example.drug.entity.User">
+        select * from user,userrole,role
+        where user.userId=userrole.userId and userrole.roleId=role.roleId and ${ew.sqlSegment}
+    </select>
+
+</mapper>
